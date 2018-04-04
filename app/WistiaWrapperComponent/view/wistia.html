@@ -1,0 +1,35 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/blueimp-file-upload/css/jquery.fileupload.css">
+    <link rel="stylesheet" href="bower_components/blueimp-file-upload/css/jquery.fileupload-ui.css">
+</head>
+<body>
+<form id="fileupload" enctype="multipart/form-data" data-ng-app="demo"
+      data-ng-controller="WistiaCtrl" data-file-upload="options"
+      data-ng-class="{'fileupload-processing': processing() || loadingFiles}">
+    <div class="row fileupload-buttonbar">
+        <div class="col-lg-7">
+            <span class="btn btn-success fileinput-button" ng-class="{disabled: disabled}">
+               <i class="glyphicon glyphicon-plus"></i>
+               <span>Upload</span>
+               <input type="file" name="files" ng-disabled="disabled">
+               </span>
+        </div>
+    </div>
+    <table ng-hide="showWistiaPlayer" class="table table-striped files ng-cloak">
+        <tr data-ng-repeat="file in queue" data-ng-class="{'processing': file.$processing()}">
+            <td>
+                <p class="size">{{file.size | formatFileSize}}</p>
+                <div class="progress progress-striped active fade" data-ng-class="{pending: 'in'}[file.$state()]"
+                     data-file-upload-progress="file.$progress()">
+                    <div class="progress-bar progress-bar-success" data-ng-style="{width: num + '%'}"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <div id="player" ng-show="showWistiaPlayer">
+    </div>
+</form>
+</body>
+</html>
